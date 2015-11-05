@@ -5,12 +5,12 @@
 
     };
 
-    InnerViewModel.attached = function () {
+    InnerViewModel.prototype.attached = function () {
         attachedCount++;
         console.log("InnerViewModel.attached - attachedCount:" + attachedCount);
     };
 
-    InnerViewModel.detached = function () {
+    InnerViewModel.prototype.detached = function () {
         attachedCount--;
         console.log("InnerViewModel.detached - attachedCount:" + attachedCount);
     };

@@ -72,6 +72,12 @@ define(['durandal/system', 'durandal/viewLocator', 'durandal/binder', 'durandal/
     function endComposition(context, element, error) {
         compositionCount--;
 
+        if (context.isDisposed) {
+            compositionCompleteCallbacks.splice(0, 0, function () {
+                ko.removeNode(context.child);
+            });
+        }
+
         if(compositionCount === 0) {
             var callBacks = compositionCompleteCallbacks;
             compositionCompleteCallbacks = [];
@@ -671,6 +677,10 @@ define(['durandal/system', 'durandal/viewLocator', 'durandal/binder', 'durandal/
             if (settings.cacheViews && !settings.viewElements) {
                 settings.viewElements = hostState.childElements;
             }
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                settings.isDisposed = true;
+            });
 
             if (!settings.model) {
                 if (!settings.view) {
