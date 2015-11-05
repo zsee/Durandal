@@ -1,4 +1,4 @@
-﻿define(['durandal/app'], function (app) {
+﻿define(['durandal/app', 'knockout'], function (app, ko) {
     var ctor = function () {
         this.displayName = 'Welcome to the Durandal Starter Kit!';
         this.description = 'Durandal is a cross-device, cross-platform client framework written in JavaScript and designed to make Single Page Applications (SPAs) easy to create and maintain.';
@@ -15,6 +15,16 @@
             'Integrates with other libraries such as SammyJS & Bootstrap',
             'Make jQuery & Bootstrap widgets templatable and bindable (or build your own widgets).'
         ];
+
+        this.showInner = ko.observable(true);
+
+        var that = this;
+        setInterval(function () {
+            that.showInner(!that.showInner());
+            that.showInner(!that.showInner());
+            that.showInner(!that.showInner());
+            that.showInner(!that.showInner());
+        }, 1000);
     };
 
     //Note: This module exports a function. That means that you, the developer, can create multiple instances.
